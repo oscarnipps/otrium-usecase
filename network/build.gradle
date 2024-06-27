@@ -1,0 +1,56 @@
+plugins {
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.apollographql.apollo3").version("3.8.4")
+    alias(libs.plugins.hiltPlugin)
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.android.otrium.network'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 26
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+apollo {
+    service("service") {
+        packageName.set("com.otrium")
+        schemaFile.set(file("$rootProject.projectDir/network/src/main/graphql/schema.graphqls"))
+    }
+}
+
+dependencies {
+    api libs.okhttp
+    api libs.logginInterceptor
+    api libs.apollographql
+    testImplementation libs.junit
+    api libs.hilt
+    kapt libs.hiltAnnotationProcessor
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/githubProfileFragment"
+    android:id="@+id/home_nav_graph">
+
+    <fragment
+        android:id="@+id/githubProfileFragment"
+        android:name="com.android.otrium.ui.GithubProfileFragment"
+        android:label="GithubProfileFragment"
+        tools:layout="@layout/fragment_github_profile"
+       />
+
+</navigation>

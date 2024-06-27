@@ -1,0 +1,54 @@
+query GithubProfile{
+    user(login: "oscarnipps") {
+        avatarUrl
+        email
+        name
+        login
+        following{
+            totalCount
+        }
+        followers{
+            totalCount
+        }
+        pinnedItems(first: 3, types: REPOSITORY) {
+            nodes {
+                ... on Repository {
+                    name
+                    description
+                    url
+                    stargazerCount
+                    primaryLanguage {
+                        name
+                        color
+                    }
+                }
+            }
+        }
+        repositories(first: 10) {
+            totalCount
+            nodes {
+                name
+                description
+                url
+                stargazerCount
+                primaryLanguage {
+                    name
+                    color
+                }
+            }
+        }
+        starredRepositories(first: 10) {
+            totalCount
+            nodes {
+                name
+                description
+                url
+                stargazerCount
+                primaryLanguage {
+                    name
+                    color
+                }
+            }
+        }
+    }
+}
