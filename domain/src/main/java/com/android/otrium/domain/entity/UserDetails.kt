@@ -8,9 +8,14 @@ data class UserDetails(
     val topRepos : List<TopRepo>,
     val pinnedRepos : List<PinnedRepo>,
 ){
+
+    //NOTE:
+    //It is not possible to collect the same value twice in a row with state flows, because they're
+    // designed to specifically to react to a change of state.
+    //
+    //StateFlows won't emit the same values by design
+    //The easiest way is to create your own class / object and override equals and hashCode so that they are always different
     //would ideally add this to a wrapper class rather than adding directly here
-    //needed to avoid the combineFlow() problem when the same state is emitted more than once
-    //the combine flow ignores passing the update / emissions
     override fun equals(other: Any?): Boolean {
         return false
     }
