@@ -16,6 +16,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -29,7 +31,7 @@ class DataModule {
         topRepoDao: TopRepoDao,
         pinnedRepoDao: PinnedRepoDao,
         starredRepoDao: StarredRepoDao,
-    ) : LocalDataSource {
+    ): LocalDataSource {
         return LocalDataSourceImpl(
             userDao,
             topRepoDao,
@@ -40,8 +42,11 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providesRemoteDataSource(apolloClient: ApolloClient , mapper: RemoteEntityMapper) : RemoteDataSource {
-        return RemoteDataSourceImpl(apolloClient,mapper)
+    fun providesRemoteDataSource(
+        apolloClient: ApolloClient,
+        mapper: RemoteEntityMapper
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(apolloClient, mapper)
     }
 
     @Provides
@@ -50,6 +55,26 @@ class DataModule {
         getUserDetailsRepoImpl: GetUserDetailsRepoImpl
     ): GetUserDetailsRepo {
         return getUserDetailsRepoImpl
+    }
+
+
+    //another way to inject dispatchers would have been to create a dispatchers module
+    //where you have separate provides method for the types (io , main , default and unconfined)
+    //and you also create annotation classes (with the required retention and qualifier annotations)
+    //to differentiate between the dispatchers () this way is preferred her because you only inject
+    //the DispatcherProvider and access what you need rather than specifying more than when needed
+    @Provides
+    @Singleton
+    fun providesDispatchers(): DispatcherProvider = object : DispatcherProvider {
+        override val io: CoroutineDispatcher
+            get() = Dispatchers.IO
+        override val main: CoroutineDispatcher
+            get() = Dispatchers.Main
+        override val unconfined: CoroutineDispatcher
+            get() = Dispatchers.Unconfined
+        override val default: CoroutineDispatcher
+            get() = Dispatchers.Default
+
     }
 
 }

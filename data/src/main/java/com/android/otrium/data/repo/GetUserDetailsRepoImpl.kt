@@ -1,5 +1,6 @@
 package com.android.otrium.data.repo
 
+import com.android.otrium.data.di.DispatcherProvider
 import com.android.otrium.data.local.LocalDataSource
 import com.android.otrium.data.remote.RemoteDataSource
 import com.android.otrium.data.remote.entity.UserDetailDto
@@ -9,7 +10,6 @@ import com.android.otrium.domain.entity.StarredRepo
 import com.android.otrium.domain.entity.TopRepo
 import com.android.otrium.domain.entity.User
 import com.android.otrium.domain.repo.GetUserDetailsRepo
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -19,11 +19,12 @@ import javax.inject.Inject
 class GetUserDetailsRepoImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
-    private val localEntityMapper: LocalEntityMapper
+    private val localEntityMapper: LocalEntityMapper,
+    private val dispatchers: DispatcherProvider
 ) : GetUserDetailsRepo {
 
     override suspend fun getUserDetailsFromApi(isPullToRefresh: Boolean) {
-        withContext(Dispatchers.IO) {
+        withContext(dispatchers.io) {
             if (isPullToRefresh || hasCacheExceeded1Day()) {
                 //call network
                 val apiResult = getUserDetailsFromAPi()
@@ -51,7 +52,7 @@ class GetUserDetailsRepoImpl @Inject constructor(
     }
 
     private suspend fun getUserDetailsFromAPi(): ApiResult<UserDetailDto> {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatchers.io) {
             remoteDataSource.getUserDetailsFromApi()
         }
     }

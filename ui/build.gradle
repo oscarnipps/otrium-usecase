@@ -43,6 +43,40 @@ dependencies {
     implementation libs.hilt
     kapt libs.hiltAnnotationProcessor
 
+    //Mock Web Server
+    testImplementation libs.mockwebserver
+
+    //coroutines
+    testImplementation libs.coroutinesTest
+
+    //fragments
+    debugImplementation(libs.fragmentTesting) {
+        exclude group: "androidx.test", module: "core"
+    }
+
+    // navigation
+    androidTestImplementation libs.navigationTesting
+
+    // room
+    testImplementation libs.roomTesting
+
+    //turbine
+    testImplementation libs.turbine
+
+    //hilt instrumentation tests.
+    androidTestImplementation libs.hiltTesting
+    kaptAndroidTest libs.hiltAndroidTestingAnnotationProcessor
+
+    // espresso
+    androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation libs.androidx.espresso.intent
+    androidTestImplementation libs.androidx.espresso.idling.resource
+
+    // Core library
+    androidTestImplementation libs.androidTestCore
+    testImplementation libs.archTestCore
+    androidTestImplementation libs.archTestCore
+
     //recyclerview
     implementation libs.recyclerview
     implementation libs.swipeToRefreshLayout

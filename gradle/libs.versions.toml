@@ -3,14 +3,14 @@ agp = "8.3.2"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
+junitVersion = "1.2.1"
+espresso = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.8.0"
+activity = "1.9.0"
 constraintlayout = "2.1.4"
 recyclerview = "1.3.2"
-fragment = "1.8.0"
+fragment = "1.8.1"
 jetbrainsKotlinJvm = "1.9.0"
 navigationComponent = '2.7.7'
 glide = '4.13.2'
@@ -24,15 +24,20 @@ roomVersion = "2.6.1"
 kotlinStdLib = '1.9.22'
 coroutines = '1.7.3'
 coroutinesAndroid = '1.3.5'
-mockk = '1.12.0'
+mockk = '1.13.9'
 swipeToRefresh = '1.2.0-alpha01'
+mockWebServer = '4.9.1'
+fragmentTesting = '1.8.1'
+hiltTesting = '2.44'
+lifecycleRuntimeTest = '2.8.3'
+navigationTesting = '2.7.7'
+androidTestCore = '1.6.1'
+archTestCore = '2.2.0'
+turbine = "0.8.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -51,15 +56,30 @@ logginInterceptor = { group = "com.squareup.okhttp3", name = "logging-intercepto
 roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 roomAnnotationProcessor = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
-roomTesting = { group = "androidx.room", name = "room-testing", version.ref = "roomVersion" }
 kotlinStdLib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdLib" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutinesAndroid = { group = "org.jetbrains.kotlin", name = "kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
-coroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 swipeToRefreshLayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeToRefresh" }
 
-
+#### testing dependecies #####
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+coroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+roomTesting = { group = "androidx.room", name = "room-testing", version.ref = "roomVersion" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockWebServer" }
+fragmentTesting = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmentTesting" }
+navigationTesting = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTesting" }
+hiltTesting = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hiltTesting" }
+hiltAndroidTestingAnnotationProcessor = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltTesting" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+androidx-espresso-intent = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espresso" }
+androidx-espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espresso" }
+lifecycleRuntimeTest = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "lifecycleRuntimeTest" }
+androidTestCore = { group = "androidx.test", name = "core", version.ref = "androidTestCore" }
+archTestCore = { group = "androidx.arch.core", name = "core-testing", version.ref = "archTestCore" }
+##############################
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

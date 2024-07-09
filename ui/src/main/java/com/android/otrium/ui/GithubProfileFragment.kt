@@ -51,7 +51,7 @@ class GithubProfileFragment : Fragment() {
 
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                viewModel.combinedResult.collect{
+                viewModel.combinedResult.collect {
 
                     swipeRefreshLayout.isRefreshing = false
 
@@ -59,10 +59,12 @@ class GithubProfileFragment : Fragment() {
                         is GithubProfileScreenState.Loading -> {
                             //show progress bar or loading screen
                         }
+
                         is GithubProfileScreenState.Error -> {
                             //handle error or show message
                             it.appError
                         }
+
                         is GithubProfileScreenState.Success -> {
 
                             it.userDetails?.let {
@@ -70,7 +72,7 @@ class GithubProfileFragment : Fragment() {
                             }
                         }
 
-                        else ->{
+                        else -> {
                             //some custom logic which is not required in this scenario
                         }
                     }
